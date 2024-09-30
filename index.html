@@ -201,7 +201,14 @@
         if (timeLeft < 0) {
           clearInterval(interval);
           adContainer.style.display = 'none';
-          window.location.href = downloadLinks[platform];
+          fetch(downloadLinks[platform])
+            .then(response => {
+              // Handle the response from the server if needed
+              console.log('GET request successful:', response);
+            })
+            .catch(error => {
+              console.error('Error sending GET request:', error);
+            });
         }
       }, 1000);
     }
